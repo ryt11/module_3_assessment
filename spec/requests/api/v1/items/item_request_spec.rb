@@ -48,8 +48,9 @@ RSpec.describe "item API calls" do
     db_item = create(:item)
 
     delete "/api/v1/items/#{db_item.id}"
+    expect(response.status).to eq(204)
     delete_response = JSON.parse(response.body)
-
+    
     expect(delete_response["status"]).to eq(204)
     expect(delete_response["deleted"]).to eq(db_item.name)
 
@@ -63,12 +64,13 @@ RSpec.describe "item API calls" do
                                 image_url: "https://placehold.it/300x300.png/000")
 
   result = JSON.parse(response.body)
-  item = Item.first
-  expect(item.name).to eq("Brown Shovel")
-  expect(item.description).to eq("beautiful city")
+
+  expect(result["name"]).to eq("Brown Shovel")
+  expect(result["description"]).to eq("beautiful city")
+  expect(result["image_url"]).to eq("https://placehold.it/300x300.png/000")
   expect(Item.count).to eq(1)
 
-  expect(response).to be_success
+  expect(response.status).to eq(201)
 end
 end
 

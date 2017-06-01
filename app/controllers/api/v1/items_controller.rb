@@ -11,15 +11,7 @@ class Api::V1::ItemsController < ApplicationController
   def create
     item = Item.new(item_params)
     if item.save
-      render status: 201, json: {
-      message: "Successfully created  list.",
-      todo_list: list
-    }.to_json
-      respond_to do |format|
-        format.html
-        # format.json { render json: {status: 201, item: item}}
-        format.json { render json: item}
-      end
+      render json: item, status: 201
     else
       render json: { message: "Failed to create item." }
     end
@@ -28,8 +20,9 @@ class Api::V1::ItemsController < ApplicationController
   def destroy
     item = Item.find (params[:id])
     if Item.destroy(params[:id])
-      msg = {:status => 204, :deleted => item.name}
-      render :json => msg
+      render json: {}
+      # msg = {:status => 204, :deleted => item.name}
+      # render :json => msg
     else
       msg = {msg: "There was a problem deleting that item."}
       render :json => msg
