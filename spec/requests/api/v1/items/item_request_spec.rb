@@ -25,6 +25,51 @@ RSpec.describe "item API calls" do
     expect(item_2["created_at"]).to eq(nil)
     expect(item_2["updated_at"]).to eq(nil)
   end
+
+  it "can respond with one item" do
+    db_item = create(:item)
+
+    get "/api/v1/items/#{db_item.id}"
+
+    item = JSON.parse(response.body)
+
+
+
+    expect(response).to be_success
+
+    expect(item["name"]).to eq(db_item.name)
+    expect(item["description"]).to eq(db_item.description)
+    expect(item["image_url"]).to eq(db_item.image_url)
+    expect(item["created_at"]).to eq(nil)
+    expect(item["updated_at"]).to eq(nil)
+  end
+
+  it "can delete an item" do
+    db_item = create(:item)
+
+    delete "/api/v1/items/#{db_item.id}"
+    delete_response = JSON.parse(response.body)
+
+    expect(delete_response["status"]).to eq(204)
+    expect(delete_response["deleted"]).to eq(db_item.name)
+
+    expect(Item.count).to eq(0)
+  end
+
+  it "can create an item" do
+
+  post api_v1_items_path(name: "Brown Shovel",
+                                description: "beautiful city",
+                                image_url: "https://placehold.it/300x300.png/000")
+
+  result = JSON.parse(response.body)
+  item = Item.first
+  expect(item.name).to eq("Brown Shovel")
+  expect(item.description).to eq("beautiful city")
+  expect(Item.count).to eq(1)
+
+  expect(response).to be_success
+end
 end
 
 
