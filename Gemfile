@@ -17,6 +17,7 @@ gem 'figaro'
 gem 'faraday'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap_form'
+gem 'capybara'
 
 group :development do
   gem "spring"
