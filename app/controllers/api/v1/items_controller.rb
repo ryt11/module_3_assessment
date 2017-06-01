@@ -19,10 +19,9 @@ class Api::V1::ItemsController < ApplicationController
 
   def destroy
     item = Item.find (params[:id])
+    item_name = item.name
     if Item.destroy(params[:id])
-      render json: {}
-      # msg = {:status => 204, :deleted => item.name}
-      # render :json => msg
+      render status: 204, json: {name: item_name}
     else
       msg = {msg: "There was a problem deleting that item."}
       render :json => msg

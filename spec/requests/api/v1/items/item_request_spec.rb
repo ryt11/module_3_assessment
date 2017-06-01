@@ -49,10 +49,6 @@ RSpec.describe "item API calls" do
 
     delete "/api/v1/items/#{db_item.id}"
     expect(response.status).to eq(204)
-    delete_response = JSON.parse(response.body)
-    
-    expect(delete_response["status"]).to eq(204)
-    expect(delete_response["deleted"]).to eq(db_item.name)
 
     expect(Item.count).to eq(0)
   end
