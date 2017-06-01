@@ -17,9 +17,4 @@ class BestBuyService
     JSON.parse(response.body)
   end
 
-
-  def total(total)
-    StoreTotal.new()
-  end
-
 end

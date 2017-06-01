@@ -1,4 +1,6 @@
 class Store
+
+  attr_reader :long_name, :city, :phone, :store_type, :distance
   def initialize(store_info = {})
     @long_name = store_info["longName"]
     @city = store_info["city"]
@@ -10,10 +12,11 @@ class Store
 
   def self.stores_within_25_miles(zip)
     response = BestBuyService.new.stores_within_25_miles(zip)
-    
-    x = response["stores"].map do |store|
+
+    stores = response["stores"].map do |store|
       Store.new(store)
     end
 
+    {stores: stores, total: response["total"]}
   end
 end
