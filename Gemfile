@@ -15,6 +15,8 @@ gem "minitest-rails"
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'figaro'
 gem 'faraday'
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap_form'
 
 group :development do
   gem "spring"

@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Search for Best Buy Stores in Your Area</h1>
+    </div>
+  </div>
+  <div class="form-signin login-session">
+    <%= bootstrap_form_for(:search, url: best_buy_search_path, method: :post) do |f| %>
+      <%= f.text_field :parameter, placeholder: "Enter a Zip..."%>
+      <%= f.submit "Search", class: "btn login btn-primary" %>
+    <% end %>
+  </div>
+</div>
