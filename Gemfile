@@ -12,12 +12,15 @@ gem "faker"
 gem "therubyracer"
 gem "less-rails-bootstrap"
 gem "minitest-rails"
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development do
   gem "spring"
 end
 
 group :development, :test do
+  gem 'pry'
+  gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'rspec-rails'
